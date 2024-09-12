@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && copy \".\\dist\\index.html\" \".\\dist\\404.html\"",
+    "build": "vite build ",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "backend": "file:../backend",
     "frontend": "file:",
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",

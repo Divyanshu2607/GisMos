@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import { rateLimit } from 'express-rate-limit';
 import dotenv from 'dotenv';
-
+import path from "path";
 
 import { verifyToken as verifyTokenGismos, generateToken as generateTokenGismos } from './middleware/authGismos.js';
 
@@ -16,6 +16,7 @@ import userSchemaGismos from './schemas/userModelGismos.js';
 
 
 dotenv.config();
+const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_URI_GISMOS = process.env.DB_URI_GISMOS;
@@ -363,7 +364,11 @@ app.put("/confirm-order", verifyTokenGismos, (req, res) => {
 		})
 	})
 })
+app.use(express.static(path.join(__dirname, "/gismos/dist")));
 
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "gismos", "dist", "index.html"));
+});
 //port listener
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`listening to port ${PORT}`);
